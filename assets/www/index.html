@@ -1,0 +1,53 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Indkøbsliste</title>
+<link rel="stylesheet" type="text/css" href="css/dx.common.css" />
+<link rel="stylesheet" type="text/css" href="css/dx.ios.default.css" />
+<link rel="stylesheet" type="text/css" href="css/dx.android.holo-dark.css" />
+<link rel="stylesheet" type="text/css" href="css/dx.desktop.default.css" />
+<link rel="stylesheet" type="text/css" href="css/dx.win8.black.small.css" />
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/knockout-2.2.1.js"></script>
+<script type="text/javascript" src="js/globalize.min.js"></script>
+<script type="text/javascript" src="js/dx.phonejs.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script>
+var l;
+
+window.onload = function(){
+	l = document.getElementById('liste');
+}
+
+function newItem(){
+	l.innerHTML += '<div><input type="text"><button onclick="addItem(this);">Tilføj</button></div>';
+}
+
+function addItem(e){
+	var p = e.parentNode;
+	p.innerHTML = p.firstChild.value;
+	p.onclick = gotIt;
+	setTimeout(function(){
+		p.className = 'item';
+	}, 50);
+	
+}
+
+function gotIt(){
+	if(this.className == 'item'){
+		this.innerHTML = '<span style="text-decoration:line-through; color: red;">'+this.innerHTML+'</span>';
+	}
+}
+
+function clearList(){
+	l.innerHTML = '';
+}
+
+</script>
+</head>
+<body>
+<button onclick="newItem();" data-bind="dxButton">Ny ting</button><button onclick="clearList();">Ryd liste</button>
+<div id="liste"></div>
+</body>
+</html>
